@@ -6,7 +6,7 @@ diset connection pg_port 54312
 diset connection pg_sslmode disable
 
 diset tpcc pg_superuser dba
-diset tpcc pg_superuserpass superuserpass
+diset tpcc pg_superuserpass yourpassword
 diset tpcc pg_defaultdbase postgres
 diset tpcc pg_user hammerdb
 diset tpcc pg_pass hammerdb

@@ -1,4 +1,4 @@
-cat << 'EOF' > /opt/unicamp-espdb/run-hammerdb/build.tcl
+cat << EOF > /opt/unicamp-espdb/run-hammerdb/build.tcl
 dbset db pg
 dbset bm TPC-C
 
