@@ -61,11 +61,7 @@ echo "export PATH=/usr/pgsql-${v_PG_VERSION}/bin:$PATH" >> /var/lib/pgsql/.bash_
 echo "export PGPORT=5432" >> /var/lib/pgsql/.bash_profile
 
 sudo -u postgres psql -c "CREATE USER dba WITH PASSWORD '${v_PG_PASS}' SUPERUSER;"
-sudo -u postgres psql << EOF
-CREATE EXTENSION IF NOT EXISTS pg_stat_statements;
-CREATE EXTENSION IF NOT EXISTS auto_explain;
-CREATE EXTENSION IF NOT EXISTS pg_prewarm;
-EOF
+sudo -u postgres psql -c "CREATE EXTENSION IF NOT EXISTS pg_stat_statements;"
 
 # check
 systemctl restart postgresql-${v_PG_VERSION}
