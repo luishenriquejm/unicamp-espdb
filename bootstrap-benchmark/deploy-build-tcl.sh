@@ -6,7 +6,7 @@ cat << EOF > /opt/unicamp-espdb/run-hammerdb/build.tcl
 dbset db pg
 dbset bm TPC-C
 
-diset connection pg_host 10.0.1.150
+diset connection pg_host 10.0.1.50
 diset connection pg_port 5432
 diset connection pg_sslmode disable
 
