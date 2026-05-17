@@ -60,17 +60,12 @@ systemctl start postgresql-${v_PG_VERSION}
 echo "export PATH=/usr/pgsql-${v_PG_VERSION}/bin:$PATH" >> /var/lib/pgsql/.bash_profile
 echo "export PGPORT=5432" >> /var/lib/pgsql/.bash_profile
 
-# allow port on firewall
-# dnf install -y firewalld
-# systemctl enable --now firewalld
-# firewall-cmd --permanent --add-port=5432/tcp
-# firewall-cmd --reload
+sudo -u postgres psql -c "CREATE USER dba WITH PASSWORD '${v_PG_PASS}' SUPERUSER;"
 
 # check
 rpm -qa | grep -i postgresql | grep -i server | sort -n
 tree /postgres
-ls -lc /etc/systemd/system/postgresql-*.service.d/ß.conf
+ls -lc /etc/systemd/system/postgresql-*.service.d/override.conf
 cat /etc/systemd/system/postgresql-*.service.d/override.conf
 tree -d -L 3 /postgres
 systemctl list-unit-files --type=service | grep -i postgres
-firewall-cmd --list-ports
