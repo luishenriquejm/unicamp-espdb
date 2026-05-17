@@ -1,5 +1,7 @@
 #!/bin/bash
 
+source /tmp/.p
+
 v_PG_VERSION=$1
 # v_PG_VERSION=18
 
