@@ -1,0 +1,26 @@
+dbset db pg
+dbset bm TPC-C
+
+diset connection pg_host 127.0.0.1
+diset connection pg_port 54312
+diset connection pg_sslmode disable
+
+diset tpcc pg_superuser dba
+diset tpcc pg_superuserpass superuserpass
+diset tpcc pg_defaultdbase postgres
+diset tpcc pg_user hammerdb
+diset tpcc pg_pass hammerdb
+diset tpcc pg_dbase tpcc
+
+diset tpcc pg_driver timed
+diset tpcc pg_rampup 5
+diset tpcc pg_duration 30
+diset tpcc pg_vacuum false
+
+vuset logtotemp 1
+vuset vu 16
+vucreate
+vurun
+waittocomplete
+vudestroy
+quit
