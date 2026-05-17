@@ -38,17 +38,20 @@ Environment=PGDATA=/postgres/${v_PG_VERSION}/data/
 EOF
 
 /usr/pgsql-${v_PG_VERSION}/bin/postgresql-${v_PG_VERSION}-setup initdb
-sed -i "s/#listen_addresses = 'localhost'/listen_addresses = '*'/g" /postgres/${v_PG_VERSION}/data/postgresql.conf
+
+# adjustments
 sed -i "s/#password_encryption = md5/password_encryption = scram-sha-256/g" /postgres/${v_PG_VERSION}/data/postgresql.conf
-# sed -i "s/#port = 5432/port = 543${v_PG_VERSION}/g" /postgres/${v_PG_VERSION}/data/postgresql.conf
+sed -i "s/#listen_addresses = 'localhost'/listen_addresses = '*'/g" /postgres/${v_PG_VERSION}/data/postgresql.conf
+sed -i "s/#port = 5432/port = 5432/g" /postgres/${v_PG_VERSION}/data/postgresql.conf
+
 systemctl enable postgresql-${v_PG_VERSION}
 systemctl start postgresql-${v_PG_VERSION}
+
 echo "export PATH=/usr/pgsql-${v_PG_VERSION}/bin:$PATH" >> /var/lib/pgsql/.bash_profile
-# echo "export PGPORT=543${v_PG_VERSION}" >> /var/lib/pgsql/.bash_profile
+echo "export PGPORT=5432" >> /var/lib/pgsql/.bash_profile
 
 # set pg_hba.conf
 echo "host    all             all             10.0.1.0/24             scram-sha-256" >> /postgres/${v_PG_VERSION}/data/pg_hba.conf
-# echo "host    all             all             0.0.0.0/0               scram-sha-256" >> /postgres/${v_PG_VERSION}/data/pg_hba.conf
 
 systemctl reload postgresql-${v_PG_VERSION}
 systemctl restart postgresql-${v_PG_VERSION}
@@ -62,7 +65,7 @@ firewall-cmd --reload
 # check
 rpm -qa | grep -i postgresql | grep -i server | sort -n
 tree /postgres
-ls -lc /etc/systemd/system/postgresql-*.service.d/override.conf
+ls -lc /etc/systemd/system/postgresql-*.service.d/ß.conf
 cat /etc/systemd/system/postgresql-*.service.d/override.conf
 tree -d -L 3 /postgres
 systemctl list-unit-files --type=service | grep -i postgres
