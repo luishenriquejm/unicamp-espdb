@@ -48,7 +48,10 @@ EOF
 
 /usr/pgsql-${v_PG_VERSION}/bin/postgresql-${v_PG_VERSION}-setup initdb
 
-# adjustments
+# pg params
+cp /postgres/${v_PG_VERSION}/data/postgresql.conf /postgres/${v_PG_VERSION}/data/postgresql.conf.bkp
+cat /opt/unicamp-espbd/bootstrap-database/postgresql.conf > /postgres/${v_PG_VERSION}/data/postgresql.conf
+
 sed -i "s/#password_encryption = md5/password_encryption = scram-sha-256/g" /postgres/${v_PG_VERSION}/data/postgresql.conf
 sed -i "s/#listen_addresses = 'localhost'/listen_addresses = '*'/g" /postgres/${v_PG_VERSION}/data/postgresql.conf
 sed -i "s/#port = 5432/port = 5432/g" /postgres/${v_PG_VERSION}/data/postgresql.conf
