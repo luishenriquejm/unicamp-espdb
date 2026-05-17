@@ -68,6 +68,8 @@ CREATE EXTENSION IF NOT EXISTS pg_prewarm;
 EOF
 
 # check
+systemctl restart postgresql-${v_PG_VERSION}
+
 rpm -qa | grep -i postgresql | grep -i server | sort -n
 tree /postgres
 ls -lc /etc/systemd/system/postgresql-*.service.d/override.conf
