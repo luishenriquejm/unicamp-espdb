@@ -84,6 +84,7 @@ resource "aws_instance" "main" {
   vpc_security_group_ids = [aws_security_group.main.id]
   key_name               = "aws-key-${var.aws_region}"
   availability_zone      = "${var.aws_region}a"
+  private_ip             = "10.0.1.50"
 }
 
 resource "aws_ebs_volume" "data" {
@@ -104,4 +105,3 @@ resource "aws_volume_attachment" "data" {
 output "public_ip" {
   value = aws_instance.main.public_ip
 }
-
