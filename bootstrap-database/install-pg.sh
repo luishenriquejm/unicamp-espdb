@@ -52,10 +52,6 @@ EOF
 cp /postgres/${v_PG_VERSION}/data/postgresql.conf /postgres/${v_PG_VERSION}/data/postgresql.conf.bkp
 cat /opt/unicamp-espbd/bootstrap-database/postgresql.conf > /postgres/${v_PG_VERSION}/data/postgresql.conf
 
-sed -i "s/#password_encryption = md5/password_encryption = scram-sha-256/g" /postgres/${v_PG_VERSION}/data/postgresql.conf
-sed -i "s/#listen_addresses = 'localhost'/listen_addresses = '*'/g" /postgres/${v_PG_VERSION}/data/postgresql.conf
-sed -i "s/#port = 5432/port = 5432/g" /postgres/${v_PG_VERSION}/data/postgresql.conf
-
 # set pg_hba.conf
 echo "host    all             all             10.0.1.0/24             scram-sha-256" >> /postgres/${v_PG_VERSION}/data/pg_hba.conf
 
